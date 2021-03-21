@@ -10,12 +10,12 @@ function doPost(e) {
     }).replace(/．/, '.');
     console.log(parseFloat(m.replace(/M([.0-9]+)程度+/gi, '$1')))
     body = body.replace(/（新形式）/m, '（予報）');
-    if(parseFloat(m.replace(/M([.0-9]+)程度+/gi, '$1')) < 5.0) {
+    if(parseFloat(m.replace(/M([.0-9]+)程度+/gi, '$1')) < 5.4) {
       return;
     }
   } else if(body.match(/《緊急地震速報（気象庁発表）》/)) {
     body = body.replace(/〈強い揺れが予想される地域〉\n(.+)/m, '〈強い揺れが予想される地域〉\n*$1*');
-  } else if(body.match(/《津波注意報》/)) {
+  } else if(body.match(/《大?津波[注意警]報》/)) {
     body = body.replace(/^.+?\n(.+)/m, '*$1*');
   } else {
     return;
